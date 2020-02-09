@@ -9,7 +9,7 @@ function Get-JavlibraryUrl {
 
     begin {
         Write-Debug "[$($MyInvocation.MyCommand.Name)] Function started"
-        $searchUrl = "http://www.javlibrary.com/en/vl_searchbyid.php?keyword=$Name"
+        $searchUrl = "http://www.javlibrary.com/cn/vl_searchbyid.php?keyword=$Name"
     }
 
     process {
@@ -30,7 +30,7 @@ function Get-JavlibraryUrl {
         # Check if the search uniquely matched a video page
         # If not, we will check the search results and check a few for if they are a match
         $searchResultUrl = $webRequest.BaseResponse.RequestMessage.RequestUri.AbsoluteUri
-        if ($searchResultUrl -match 'http:\/\/www\.javlibrary\.com\/en\/\?v=') {
+        if ($searchResultUrl -match 'http:\/\/www\.javlibrary\.com\/cn\/\?v=') {
             try {
                 Write-Debug "[$($MyInvocation.MyCommand.Name)] Performing [GET] on Uri [$searchResultUrl] with Session: [$Session] and UserAgent: [$($Session.UserAgent)]"
                 $webRequest = Invoke-WebRequest -Uri $searchResultUrl -Method Get -WebSession $Session -UserAgent $Session.UserAgent -Verbose:$false
@@ -58,7 +58,7 @@ function Get-JavlibraryUrl {
                 $count = 1
                 foreach ($result in $searchResults) {
                     $videoId = ($result -split '=')[1]
-                    $directUrl = "http://www.javlibrary.com/en/?v=$videoId"
+                    $directUrl = "http://www.javlibrary.com/cn/?v=$videoId"
                     Write-Debug "[$($MyInvocation.MyCommand.Name)] Performing [GET] on Uri [$directUrl] with Session: [$Session] and UserAgent: [$($Session.UserAgent)]"
                     $webRequest = Invoke-WebRequest -Uri $directUrl -Method Get -WebSession $Session -UserAgent $Session.UserAgent -Verbose:$false
                     $resultId = Get-JLId -WebRequest $webRequest

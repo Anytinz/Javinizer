@@ -2,7 +2,7 @@ function New-CloudflareSession {
     [CmdletBinding(SupportsShouldProcess = $true)]
     param (
         [Parameter(Position = 0)]
-        [string]$Url = "http://www.javlibrary.com/en/",
+        [string]$Url = "http://www.javlibrary.com/cn/",
         [string]$ScriptRoot
     )
 

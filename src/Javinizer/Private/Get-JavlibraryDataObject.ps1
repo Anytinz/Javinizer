@@ -72,7 +72,7 @@ function Get-JLId {
     )
 
     process {
-        $id = ((($WebRequest.Content -split '<td class="header">ID:<\/td>')[1] -split '<\/td>')[0] -split '>')[1]
+        $id = ((($WebRequest.Content -split '<td class="header">识别码:<\/td>')[1] -split '<\/td>')[0] -split '>')[1]
         Write-Output $id
     }
 }
@@ -96,7 +96,7 @@ function Get-JLReleaseDate {
     )
 
     process {
-        $releaseDate = ((($WebRequest.Content -split '<td class="header">Release Date:<\/td>')[1] -split '<\/td>')[0] -split '>')[1]
+        $releaseDate = ((($WebRequest.Content -split '<td class="header">发行日期:<\/td>')[1] -split '<\/td>')[0] -split '>')[1]
         Write-Output $releaseDate
     }
 }
@@ -119,7 +119,7 @@ function Get-JLRuntime {
     )
 
     process {
-        $length = ((($WebRequest.Content -split '<td class="header">Length:<\/td>')[1] -split '<\/span>')[0] -split '"text">')[1]
+        $length = ((($WebRequest.Content -split '<td class="header">长度:<\/td>')[1] -split '<\/span>')[0] -split '"text">')[1]
         Write-Output $length
     }
 }
@@ -130,7 +130,7 @@ function Get-JLDirector {
     )
 
     process {
-        $director = (((($WebRequest.Content -split '<td class="header">Director:</td>')[1]) -split '<\/td>')[0])
+        $director = (((($WebRequest.Content -split '<td class="header">导演:</td>')[1]) -split '<\/td>')[0])
         if ($director -match '<\/a>') {
             $director = (($director -split 'rel="tag">')[1] -split '<\/a')[0]
         } else {
@@ -147,7 +147,7 @@ function Get-JLMaker {
     )
 
     process {
-        $maker = (((($WebRequest.Content -split '<td class="header">Maker:</td>')[1]) -split '<\/a>')[0] -split 'rel="tag">')[1]
+        $maker = (((($WebRequest.Content -split '<td class="header">制作商:</td>')[1]) -split '<\/a>')[0] -split 'rel="tag">')[1]
         $maker = Convert-HtmlCharacter -String $maker
         Write-Output $maker
     }
@@ -159,7 +159,7 @@ function Get-JLLabel {
     )
 
     process {
-        $label = (((($WebRequest.Content -split '<td class="header">Label:</td>')[1]) -split '<\/a>')[0] -split 'rel="tag">')[1]
+        $label = (((($WebRequest.Content -split '<td class="header">发行商:</td>')[1]) -split '<\/a>')[0] -split 'rel="tag">')[1]
         $label = Convert-HtmlCharacter -String $label
         Write-Output $label
     }
@@ -171,7 +171,7 @@ function Get-JLRating {
     )
 
     process {
-        $rating = (((($WebRequest.Content -split '<td class="header">User Rating:</td>')[1]) -split '<\/span>')[0] -split '<span class="score">')[1]
+        $rating = (((($WebRequest.Content -split '<td class="header">使用者评价:</td>')[1]) -split '<\/span>')[0] -split '<span class="score">')[1]
         $rating = ($rating -replace '\(', '') -replace '\)', ''
         Write-Output $rating
     }
@@ -187,7 +187,7 @@ function Get-JLGenre {
     }
 
     process {
-        $genreHtml = ($WebRequest.Content -split '<td class="header">Genre\(s\):<\/td>')[1]
+        $genreHtml = ($WebRequest.Content -split '<td class="header">类别:<\/td>')[1]
         $genreHtml = ($genreHtml -split '<\/td>')[0]
         $genreHtml = $genreHtml -split 'rel="category tag">'
 
