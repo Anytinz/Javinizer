@@ -16,7 +16,7 @@ function Get-R18ThumbCsv {
 
     process {
         try {
-            $webRequest = Invoke-WebRequest -Uri "https://www.r18.com/videos/vod/movies/actress/letter=a/sort=popular/page=1/" -Method Get -Verbose:$false
+            $webRequest = Invoke-WebRequest -Uri "https://www.r18.com/videos/vod/movies/actress/letter=a/sort=popular/page=1/?lg=zh" -Method Get -Verbose:$false
             $EndPage = ((($webRequest.Content -split '<li>\.\.\.<\/li>')[1] -split '<\/a><\/li>')[0] -split '>')[2]
             if (-not ($PSBoundParameters.ContainsKey('NewPages'))) {
                 $NewPages = $EndPage
@@ -36,7 +36,7 @@ function Get-R18ThumbCsv {
                     $actressBlock = @()
                     $actressObject = @()
 
-                    $webRequest = Invoke-WebRequest "https://www.r18.com/videos/vod/movies/actress/letter=a/sort=new/page=$_" -Verbose:$false
+                    $webRequest = Invoke-WebRequest "https://www.r18.com/videos/vod/movies/actress/letter=a/sort=new/page=$_/?lg=zh" -Verbose:$false
                     $actressHtml = $webRequest.Content -split '<p><img '
                     $actressHtml = $actressHtml | Where-Object { $_ -like 'src=*' }
 
@@ -76,7 +76,7 @@ function Get-R18ThumbCsv {
                     $actressBlock = @()
                     $actressObject = @()
 
-                    $webRequest = Invoke-WebRequest "https://www.r18.com/videos/vod/movies/actress/letter=a/sort=popular/page=$_" -Verbose:$false
+                    $webRequest = Invoke-WebRequest "https://www.r18.com/videos/vod/movies/actress/letter=a/sort=popular/page=$_/?lg=zh" -Verbose:$false
                     $actressHtml = $webRequest.Content -split '<p><img '
                     $actressHtml = $actressHtml | Where-Object { $_ -like 'src=*' }
 
