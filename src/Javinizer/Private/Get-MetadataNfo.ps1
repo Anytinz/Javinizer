@@ -44,8 +44,7 @@ function Get-MetadataNfo {
         $nfoString = @"
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <movie>
-    <title>$displayName</title>
-    <originaltitle>$alternateTitle</originaltitle>
+    <title>$displayName $alternateTitle</title>
     <id>$($DataObject.Id)</id>
     <releasedate>$($DataObject.ReleaseDate)</releasedate>
     <year>$($DataObject.ReleaseYear)</year>
@@ -56,7 +55,7 @@ function Get-MetadataNfo {
     <plot>$description</plot>
     <runtime>$($DataObject.Runtime)</runtime>
     <trailer>$($DataObject.TrailerUrl)</trailer>
-    <mpaa>XXX</mpaa>
+    <mpaa>NC-17</mpaa>
 
 "@
 
